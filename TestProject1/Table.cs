@@ -20,12 +20,6 @@ namespace TestProject2
             options.AddArgument("disable-dev-shm-usage");
             options.AddArgument("disable-gpu");
             options.AddArgument("disable-extensions");
-            
-
-
-            string userDataDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-            Directory.CreateDirectory(userDataDir);
-            options.AddArgument($"--user-data-dir={userDataDir}");
 
             // Create object of ChromeDriver
             driver = new ChromeDriver(options);
@@ -79,7 +73,7 @@ namespace TestProject2
         {
             // Quit the driver
             driver.Quit();
-            driver.Dispose();
+        
         }
     }
 }
