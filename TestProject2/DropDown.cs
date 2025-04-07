@@ -15,8 +15,21 @@ namespace TestProject3
         [SetUp]
         public void SetUp()
         {
+
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("headless");
+            options.AddArgument("no-sandox");
+            options.AddArgument("disable-dev-shm-usage");
+            options.AddArgument("disable-gpu");
+            options.AddArgument("disable-extensions");
+            options.AddArgument("remote-debugging-port=9222");
+
+
+            string userDataDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            Directory.CreateDirectory(userDataDir);
+            options.AddArgument($"--user-data-dir={userDataDir}");
             // Create object of ChromeDriver
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options);
 
             // Add implicit wait
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);

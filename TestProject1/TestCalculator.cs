@@ -20,7 +20,21 @@ namespace TestProject1
         [OneTimeSetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("headless");
+            options.AddArgument("no-sandox");
+            options.AddArgument("disable-dev-shm-usage");
+            options.AddArgument("disable-gpu");
+            options.AddArgument("disable-extensions");
+            options.AddArgument("remote-debugging-port=9222");
+          
+
+            string userDataDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            Directory.CreateDirectory(userDataDir);
+
+            options.AddArgument($"--user-data-dir={userDataDir}");
+
+            driver = new ChromeDriver(options);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Url = "http://softuni-qa-loadbalancer-2137572849.eu-north-1.elb.amazonaws.com/number-calculator/";
 
