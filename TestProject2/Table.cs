@@ -19,7 +19,6 @@ namespace TestProject2
             options.AddArgument("disable-dev-shm-usage");
             options.AddArgument("disable-gpu");
             options.AddArgument("disable-extensions");
-            options.AddArgument("remote-debugging-port=9222");
 
 
             string userDataDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
@@ -79,6 +78,7 @@ namespace TestProject2
         {
             // Quit the driver
             driver.Quit();
+            driver.Dispose();
         }
     }
 }
